@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:esb="http:///org/wso2/developerstudio/eclipse/gmf/esb" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_irvGEI8PEeOHTMeIJ65KIw" type="Esb" name="task_TwitterSFTask.esb_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_jBO08I8PEeOHTMeIJ65KIw" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_jBQDEI8PEeOHTMeIJ65KIw" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_lNyzII8PEeOHTMeIJ65KIw" type="3667">
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_lNyzIY8PEeOHTMeIJ65KIw"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_lNyzIo8PEeOHTMeIJ65KIw" fontName="Ubuntu"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_lNyzI48PEeOHTMeIJ65KIw"/>
+        <element xmi:type="esb:Task" href="task_TwitterSFTask.esb#//@server/@children.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lNyzJI8PEeOHTMeIJ65KIw" width="75" height="75"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_jBO08Y8PEeOHTMeIJ65KIw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_jBO08o8PEeOHTMeIJ65KIw" fontName="Ubuntu"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_jBO0848PEeOHTMeIJ65KIw"/>
+    <element xmi:type="esb:EsbServer" href="task_TwitterSFTask.esb#//@server"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jBO09I8PEeOHTMeIJ65KIw"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_irvtII8PEeOHTMeIJ65KIw"/>
+  <element xmi:type="esb:EsbDiagram" href="task_TwitterSFTask.esb#/"/>
+</notation:Diagram>

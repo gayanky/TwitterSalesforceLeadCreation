@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="SFProxy" transports="http https" startOnLoad="true" trace="disable">
+    <target>
+        <inSequence>
+            <log level="full">
+                <property name="sfseq" value="SF SEQ"/>
+            </log>
+            <property name="messageType" value="text/xml" scope="axis2" type="STRING"/>
+            <property name="ContentType" value="text/xml" scope="axis2" type="STRING"/>
+            <property name="FORCE_HTTP_1.0" value="true" scope="axis2" type="STRING"/>
+            <salesforce.init>
+                <username>gayanky@gmail.com</username>
+                <password>Abcd@1234jq0iuIXYepxgFXyw5fCTZBVbk</password>
+                <loginUrl>https://login.salesforce.com/services/Soap/u/27.0</loginUrl>
+            </salesforce.init>
+            <salesforce.query>
+                <batchSize>100</batchSize>
+                <queryString>SELECT Email, Name FROM Lead</queryString>
+            </salesforce.query>
+            <log level="full">
+                <property name="sfquery" value="SF QUERY"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+</proxy>

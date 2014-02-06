@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="SFLeadSequence" onError="FaultSeq">
+    <salesforce.init>
+        <username>gayanky@gmail.com</username>
+        <password>Abcd@1234jq0iuIXYepxgFXyw5fCTZBVbk</password>
+        <loginUrl>https://login.salesforce.com/services/Soap/u/27.0</loginUrl>
+    </salesforce.init>
+    <payloadFactory media-type="xml" description="">
+        <format>
+            <sfdc:sObjects xmlns:sfdc="sfdc" type="Lead">
+                <sfdc:sObject>
+                    <sfdc:Email>$1</sfdc:Email>
+                    <sfdc:LastName>$2</sfdc:LastName>
+                    <sfdc:Company>WSO2-TwitterFeed</sfdc:Company>
+                    <sfdc:Description>$3</sfdc:Description>
+                </sfdc:sObject>
+            </sfdc:sObjects>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//email"/>
+            <arg evaluator="xml" expression="//name"/>
+            <arg evaluator="xml" expression="//text"/>
+        </args>
+    </payloadFactory>
+    <salesforce.create>
+        <allOrNone>0</allOrNone>
+        <allowFieldTruncate>0</allowFieldTruncate>
+        <sobjects xmlns:sfdc="sfdc">{//sfdc:sObjects}</sobjects>
+    </salesforce.create>
+    <log level="custom">
+        <property name="leadcreate" value="LEAD CREATE"/>
+    </log>
+    <respond/>
+</sequence>

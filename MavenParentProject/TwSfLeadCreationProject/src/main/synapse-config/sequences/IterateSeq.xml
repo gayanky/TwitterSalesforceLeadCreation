@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="IterateSeq">
+    <log level="custom">
+        <property name="iterateS" value="ITERATE SEQ"/>
+    </log>
+    <property name="text" expression="//statuses/text" scope="default" type="STRING"/>
+    <property name="user" expression="//statuses/user/name" scope="default" type="STRING"/>
+    <property name="screen_name" expression="//statuses/user/screen_name" scope="default" type="STRING"/>
+    <payloadFactory media-type="xml" description="">
+        <format>
+            <mediate xmlns="">
+                <text>$1</text>
+            </mediate>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//statuses/text"/>
+        </args>
+    </payloadFactory>
+    <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" type="STRING"/>
+    <property name="FORCE_HTTP_1.0" value="true" scope="axis2" type="STRING"/>
+    <property name="DISABLE_CHUNKING" value="true" scope="axis2" type="STRING"/>
+    <log level="full" category="DEBUG">
+        <property name="type" expression="//label"/>
+        <property name="text" expression="$ctx:text"/>
+        <property name="preCall" value="PRE SENTIMENT"/>
+    </log>
+    <call>
+        <endpoint>
+            <address uri="http://text-processing.com/api/sentiment/"/>
+        </endpoint>
+    </call>
+    <log level="full">
+        <property name="postCall" value="POST SENTIMENT"/>
+    </log>
+    <filter source="//label" regex="pos">
+        <then>
+            <log level="custom">
+                <property name="label" expression="//label"/>
+                <property name="user" expression="$ctx:user"/>
+                <property name="screen_name" expression="$ctx:screen_name"/>
+                <property name="txt" expression="$ctx:text"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <SFDC xmlns="">
+                        <name>$1</name>
+                        <email>$2</email>
+                        <text>$3</text>
+                    </SFDC>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:user"/>
+                    <arg evaluator="xml" expression="concat($ctx:screen_name,'@twitter.com')"/>
+                    <arg evaluator="xml" expression="$ctx:text"/>
+                </args>
+            </payloadFactory>
+            <header name="Action" scope="default" value="urn:mediate"/>
+            <call>
+                <endpoint>
+                    <address uri="http://localhost:8280/services/SFLeadCreator" format="soap11"/>
+                </endpoint>
+            </call>
+        </then>
+        <else/>
+    </filter>
+</sequence>

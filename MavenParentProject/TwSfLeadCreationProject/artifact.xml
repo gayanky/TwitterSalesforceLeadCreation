@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="TwitterSFTask" groupId="com.example.TwSfLeadCreationProject.task" version="1.0.0" type="synapse/task" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/tasks/TwitterSFTask.xml</file>
+    </artifact>
+    <artifact name="CallSeq" groupId="com.example.TwSfLeadCreationProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/CallSeq.xml</file>
+    </artifact>
+    <artifact name="FaultSeq" groupId="com.example.TwSfLeadCreationProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FaultSeq.xml</file>
+    </artifact>
+    <artifact name="IterateSeq" groupId="com.example.TwSfLeadCreationProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/IterateSeq.xml</file>
+    </artifact>
+    <artifact name="NoMessageSeq" groupId="com.example.TwSfLeadCreationProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/NoMessageSeq.xml</file>
+    </artifact>
+    <artifact name="SFLeadSequence" groupId="com.example.TwSfLeadCreationProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/SFLeadSequence.xml</file>
+    </artifact>
+    <artifact name="SFLeadCreator" groupId="com.example.TwSfLeadCreationProject.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/SFLeadCreator.xml</file>
+    </artifact>
+    <artifact name="SFProxy" groupId="com.example.TwSfLeadCreationProject.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/SFProxy.xml</file>
+    </artifact>
+    <artifact name="TWProxy" groupId="com.example.TwSfLeadCreationProject.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/TWProxy.xml</file>
+    </artifact>
+</artifacts>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="TWProxy" transports="http https" startOnLoad="true" trace="disable">
+    <target faultSequence="FaultSeq">
+        <inSequence>
+            <dblookup>
+                <connection>
+                    <pool>
+                        <password>root</password>
+                        <user>root</user>
+                        <url>jdbc:mysql://localhost:3306/TwitterDB</url>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql>SELECT id FROM LastTwitter</sql>
+                    <result name="lastId" column="id"/>
+                </statement>
+            </dblookup>
+            <twitter.init>
+                <consumerKey>J6qlmlGWaIKBHSxpouRhw</consumerKey>
+                <consumerSecret>CkJW7u4i3D4iBjbz8inH51mOUt7I8HyXKCG5quWQKA</consumerSecret>
+                <accessToken>542362636-bRCJxvDBkQzBvHDjpXGD95Oo7tQ7Sumgi5tSkZP7</accessToken>
+                <accessTokenSecret>QUDbRz7SlMxPDzaXz2ddNdeS7wGr42xXYz31tLyGUpMin</accessTokenSecret>
+            </twitter.init>
+            <log level="custom">
+                <property name="init" value="TW INIT"/>
+            </log>
+            <twitter.search>
+                <search>#news</search>
+                <sinceId>{$ctx:lastId}</sinceId>
+                <count>100</count>
+            </twitter.search>
+            <log level="custom">
+                <property name="search" value="TW SEARCH"/>
+            </log>
+            <filter xmlns:ns="http://org.apache.synapse/xsd" xpath="//jsonObject/statuses">
+                <then>
+                    <log level="custom" description="">
+                        <property name="newMsg" value="NEW MESSAGE"/>
+                    </log>
+                </then>
+                <else>
+                    <sequence key="NoMessageSeq"/>
+                </else>
+            </filter>
+            <dbreport>
+                <connection>
+                    <pool>
+                        <password>root</password>
+                        <user>root</user>
+                        <url>jdbc:mysql://localhost:3306/TwitterDB</url>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql>UPDATE LastTwitter SET id=?</sql>
+                    <parameter xmlns:ns="http://org.apache.synapse/xsd" expression="substring(//jsonObject/statuses/id,1,18)" type="VARCHAR"/>
+                </statement>
+            </dbreport>
+            <log level="custom">
+                <property name="dbreport" value="DB REPORTED"/>
+            </log>
+            <iterate xmlns:ns="http://org.apache.synapse/xsd" preservePayload="true" expression="//jsonObject/statuses">
+                <target>
+                    <sequence>
+                        <sequence key="IterateSeq"/>
+                    </sequence>
+                </target>
+            </iterate>
+        </inSequence>
+        <outSequence/>
+    </target>
+</proxy>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="NoMessageSeq">
+    <log level="custom">
+        <property name="Twitter" value="No New Messages"/>
+    </log>
+    <drop/>
+</sequence>

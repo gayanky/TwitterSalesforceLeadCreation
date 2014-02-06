@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<esb:EsbDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:esb="http:///org/wso2/developerstudio/eclipse/gmf/esb">
+  <server type="TASK">
+    <children xsi:type="esb:Task" taskName="TwitterSFTask" interval="15">
+      <taskProperties propertyName="injectTo" propertyValue="sequence"/>
+      <taskProperties propertyName="message" propertyValue="&lt;a>123&lt;/a>" propertyType="XML"/>
+      <taskProperties propertyName="sequenceName" propertyValue="callSeq"/>
+    </children>
+  </server>
+</esb:EsbDiagram>
